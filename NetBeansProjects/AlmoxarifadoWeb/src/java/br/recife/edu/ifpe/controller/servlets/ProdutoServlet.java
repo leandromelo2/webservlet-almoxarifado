@@ -66,13 +66,14 @@ public class ProdutoServlet extends HttpServlet {
             out.println("<br/>");
             out.println("<br/>");
             out.println("<table border=\"1\"/>");
-            out.println("<tr><th>Código</th><th>Nome</><th>Marca</><th>Categoria</th</tr>");
+            out.println("<tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Operações</th></tr>");
             for (Produto p: produtos){
              out.println("<tr>");
              out.println("<td>"+p.getCodigo()+"</td>");
              out.println("<td>"+p.getNome()+"</td>");
              out.println("<td>"+p.getMarca()+"</td>");
              out.println("<td>"+p.getCategoria()+"</td>");
+             out.println("<td><a href=\"ProdutoServlet?codigo="+p.getCodigo()+"\">Visualizar</a> </td>");
              
                 
             }       
@@ -99,6 +100,7 @@ public class ProdutoServlet extends HttpServlet {
                 out.println("<body>");
                 out.println("<h1>Produto Recuperado</h1>");
                 out.println("<a href=\"index.html\">home<a/> <br/>");
+                out.println("<a href=\"ProdutoServlet\" id=\"link\"> Voltar <a/> ");
                 out.println("<br/>");
                 out.println("<br/>");
                 out.println("Código: " + p.getCodigo() + "<br/>");
