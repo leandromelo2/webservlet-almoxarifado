@@ -40,7 +40,7 @@ public class ProdutoServlet extends HttpServlet {
      *  
      * VIDEO 7 08/10/2020 finalizado
      * VIDEO 8 08/10/2020 finalizado
-     * VIDEO 9 sexta
+     * VIDEO 9 09/10/2020 sexta Manha 0850
      * 
      * 
      *  
@@ -70,6 +70,7 @@ public class ProdutoServlet extends HttpServlet {
 //                out.println("<th><input type=\"text\" name=\"codigo\" disabled/></th>");
                 out.println("<a href=\"index.html\">home<a/> <br/>");
                 out.println("<a href=\"ProdutoServlet\">Lista de produtos</a> ");
+                out.println("<br/>");
                 out.println("<br/>");
                 out.println("        <form method=\"post\" action= \"ProdutoServlet\">\n"
                         + "            <table>\n"
@@ -138,7 +139,7 @@ public class ProdutoServlet extends HttpServlet {
              out.println("<td>"+p.getMarca()+"</td>");
              out.println("<td>"+p.getCategoria()+"</td>");
              out.println("<td><a href=\"ProdutoServlet?codigo=" + p.getCodigo() + "\">Visualizar </a>"
-                     + "<a href='ProdutoServlet?codigo=" + p.getCodigo() + "&atualizar=1'>atualizar</a></td>");
+                     + "<a href='ProdutoServlet?codigo=" + p.getCodigo() + "&atualizar=1'> atualizar</a></td>");
              out.println("</tr>");
                 
             }       
@@ -218,18 +219,18 @@ public class ProdutoServlet extends HttpServlet {
         
         
         
-     response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProdutoServlet</title>");            
+            out.println("<title>Servlet ProdutoServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            if (atualizar == null){
+            if (atualizar == null) {
                 out.println("<h1>Produto " + p.getNome() + " cadastrado com sucesso.</h1>");
-            }else{
+            } else {
                 out.println("<h1>Produto " + p.getNome() + " atualizado com sucesso.</h1>");
             }
 //            out.println("<h1>Categoria " + p.getCategoria() + ".</h1>");
