@@ -38,7 +38,10 @@ public class ProdutoServlet extends HttpServlet {
      * 
      * 
      *  
-     * CONTINUAR DO VIDEO 7 08/10/2020 quinta
+     * VIDEO 7 08/10/2020 finalizado
+     * VIDEO 8 08/10/2020 finalizado
+     * VIDEO 9 
+     * 
      * 
      *  
      */
@@ -46,8 +49,69 @@ public class ProdutoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String atualizar = request.getParameter("atualizar");
         String codAux = request.getParameter("codigo");
-        if (codAux == null) {
+        
+        if (atualizar != null){
+            
+            int codigo = Integer.parseInt(codAux);
+            Produto p = RepositorioProdutos.getCurrentInstance().read(codigo);
+                    
+                    response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet ProdutoServlet</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Produto Recuperado</h1>");
+//                out.println("<th><input type=\"text\" name=\"codigo\" disabled/></th>");
+                out.println("<a href=\"index.html\">home<a/> <br/>");
+                out.println("<a href=\"ProdutoServlet\">Lista de produtos</a> ");
+                out.println("<br/>");
+                out.println("        <form method=\"post\" action= \"ProdutoServlet\">\n"
+                        + "            <table>\n"
+                        + "                <tr>               \n"
+                        + "                    <th>Codigo:</th> \n"
+                        + "                    <th><input type=\"hidden\" name=\"codigo\" value=\""+p.getCodigo()+"\"/></th>                          \n"
+                        + "                </tr>\n"
+                        + "                <tr> \n"
+                        + "                    <th> Nome:</th>\n"
+                        + "                    <th> <input type=\"text\" name=\"nome\" value=\""+p.getNome()+"\"/></th>                    \n"
+                        + "                </tr>\n"
+                        + "                <tr>\n"
+                        + "                    <th> Marca:</th>\n"
+                        + "                    <th><input type=\"text\" name=\"marca\"value=\""+p.getMarca()+"\"/></th>\n"
+                        + "                </tr>\n"
+                        + "                <tr>\n"
+                        + "                    <th>Categoria:</th>\n"
+                        + "                    <th><input type=\"text\" name=\"categoria\"value=\""+p.getCategoria()+"\"/></th>                    \n"
+                        + "                </tr>\n"
+                        + "                <tr>\n"
+                        + "                    <th>Descrição:</th>\n"
+                        + "                    <th><textarea name=\"descricao\">"+p.getDescricao()+"</textarea></th>\n"                                
+                        + "                </tr>\n"
+                        +"                  <tr>\n"
+                        + "                    <th></th>\n"
+                        + "                    <th><input type='hidden'name='atualizar' value='1'</th>\n"                                
+                        + "                </tr>\n"
+                        + "                <tr>\n"
+                        + "                    <th><input type=\"submit\" value=\"atualizar\"/></th>\n"
+                        + "                </tr>               \n"
+                        + "            </table>\n"
+                        + "        </form>");
+              
+               
+                out.println("</body>");
+                out.println("</html>");
+
+            }
+        
+        }
+        
+        if (codAux == null && atualizar == null) {
             
             java.util.List<Produto> produtos = RepositorioProdutos.getCurrentInstance().readAll();
         
@@ -73,8 +137,9 @@ public class ProdutoServlet extends HttpServlet {
              out.println("<td>"+p.getNome()+"</td>");
              out.println("<td>"+p.getMarca()+"</td>");
              out.println("<td>"+p.getCategoria()+"</td>");
-             out.println("<td><a href=\"ProdutoServlet?codigo="+p.getCodigo()+"\">Visualizar</a> </td>");
-             
+             out.println("<td><a href=\"ProdutoServlet?codigo=" + p.getCodigo() + "\">Visualizar </a>"
+                     + "<a href='ProdutoServlet?codigo=" + p.getCodigo() + "&atualizar=1'>atualizar</a></td>");
+             out.println("</tr>");
                 
             }       
             
@@ -124,6 +189,7 @@ public class ProdutoServlet extends HttpServlet {
         String marca = request.getParameter("marca");
         String categoria = request.getParameter("categoria");
         String descricao = request.getParameter("descricao");
+        String atualizar = request.getParameter("atualizar");
 //        request.getParameterValues("")[];
         
         Produto p = new Produto();
@@ -134,6 +200,10 @@ public class ProdutoServlet extends HttpServlet {
         p.setCategoria(categoria);
         p.setDescricao(descricao);
         
+        if(atualizar!=null){
+            RepositorioProdutos.getCurrentInstance().update(p);
+            
+        }else {
         RepositorioProdutos.getCurrentInstance().create(p);
         
         ItemEstoque item = new ItemEstoque();
@@ -143,6 +213,9 @@ public class ProdutoServlet extends HttpServlet {
         
       
         RepositorioEstoque.getCurrentInstance() .read().addItem(item);
+        }
+        
+        
         
         
      response.setContentType("text/html;charset=UTF-8");
@@ -154,7 +227,11 @@ public class ProdutoServlet extends HttpServlet {
             out.println("<title>Servlet ProdutoServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Produto " + p.getNome() + " cadastrado com sucesso.</h1>");
+            if (atualizar == null){
+                out.println("<h1>Produto " + p.getNome() + " cadastrado com sucesso.</h1>");
+            }else{
+                out.println("<h1>Produto " + p.getNome() + " atualizado com sucesso.</h1>");
+            }
 //            out.println("<h1>Categoria " + p.getCategoria() + ".</h1>");
             out.println("<a href=\"index.html\">home</a>");
             out.println("</body>");
