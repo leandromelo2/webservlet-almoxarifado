@@ -1,17 +1,19 @@
-<!DOCTYPE html>
+<%-- 
+    Document   : cadastroproduto
+    Created on : 22/09/2020, 22:46:53
+    Author     : leandro melo
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Cadastro de Produto</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>AlmoxarifadoWeb</title>
     </head>
     <body>
-        <a href="index.html" id="link"> Home </a> <br/>
-        <a href="ProdutoServlet" id="link"> Produtos cadastrados </a> <br/>
-         
-        <h1>Cadastro de Produto</h1>
-        <form method="post" action= "ProdutoServlet">
+        <h1>Cadastro de produtos!</h1>
+        <form method="post" action= "ProdutoServletNew">
             <table>
                 <tr>               
                     <th>Codigo:</th> 
@@ -37,6 +39,6 @@
                     <th><input type="submit" value="cadastrar"/></th>
                 </tr>               
             </table>
-        </form>              
+        </form>    
     </body>
 </html>
