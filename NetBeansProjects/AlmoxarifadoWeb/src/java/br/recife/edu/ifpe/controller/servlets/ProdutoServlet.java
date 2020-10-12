@@ -31,11 +31,7 @@ public class ProdutoServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      *
-     * VIDEO 7 08/10/2020 finalizado VIDEO 8 08/10/2020 finalizado VIDEO 9
-     * 09/10/2020 sexta Manha 0850
-     *
-     *
-     *
+     * 
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

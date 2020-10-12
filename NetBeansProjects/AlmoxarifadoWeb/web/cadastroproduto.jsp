@@ -12,7 +12,7 @@
         <title>AlmoxarifadoWeb</title>
     </head>
     <body>
-        <h1>Cadastro de produtos!</h1>
+        <h1>Cadastro de produtos</h1>
         <form method="post" action= "ProdutoServletNew">
             <table>
                 <tr>               
