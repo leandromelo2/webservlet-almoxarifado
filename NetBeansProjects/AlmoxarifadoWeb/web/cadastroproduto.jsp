@@ -10,11 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>AlmoxarifadoWeb</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javacript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Cadastro de produtos</h1>
+        <!--<h4>Cadastro de produtos</h4>-->
         <form method="post" action= "ProdutoServletNew">
             <table>
+                <tr>               
+                    <th><h3>Cadastro de Produto</h3></th>                                             
+                </tr>
                 <tr>               
                     <th>Codigo:</th> 
                     <th><input type="text" name="codigo"/></th>                          

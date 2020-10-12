@@ -8,8 +8,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>AW-CadastroFuncionario</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <script type="text/javacript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <h1>Cadastro de funcionário</h1>
@@ -23,9 +25,21 @@
                     <th>Nome:</th>
                     <th> <input type="text" name="nome"/></th>                    
                 </tr>
-                <tr>
+<!--              
+            <tr>
                     <th>Departamento:</th>
                     <th><input type="text" name="Departamento"/></th>
+                </tr>
+-->
+                <tr>
+                    <th>Departamento:</th>
+                    <th> <select type="text" name="departamento"> 
+                            <option value="almoxarifado">Almoxarifado</option> 
+                            <option value="vendas">Vendas</option> 
+                            <option value="departamento pessoal">Departamento Pessoal</option> 
+                            <option value="departamento financeiro">Departamento Financeiro</option> 
+                        </select>   
+                    </th>
                 </tr>
                 <th><input type="submit" value="cadastrar"/></th>
                 </tr>               
