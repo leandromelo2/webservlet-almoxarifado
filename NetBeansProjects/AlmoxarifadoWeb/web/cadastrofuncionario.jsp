@@ -14,7 +14,10 @@
         <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Cadastro de funcionário</h1>
+        <a href="index.html" id="link"> Página Inicial </a> <br/>
+         <a href="listarfuncionarios.jsp" id="link"> Lista de funcionarios cadastrados</a>
+        <h3>Cadastro de funcionário</h3>
+
         <form method="post" action= "FuncionarioServlet">
             <table>
                 <tr>               

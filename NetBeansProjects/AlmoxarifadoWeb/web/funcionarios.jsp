@@ -15,17 +15,20 @@
         <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Funcionário cadastrado!</h1>
+        <a href="index.html" id="link"> Página Inicial </a> <br/>
+        <a href="cadastrofuncionario.jsp" id="link"> Cadastro de funcionário</a> <br/>
+        <a href="listarfuncionarios.jsp" id="link"> Lista de funcionarios cadastrados</a>
+        <h3>Funcionário cadastrado!</h3>
         <%
             String mensagem = (String)session.getAttribute("msg");
             if(mensagem != null){
-                out.println("<h2>"+mensagem+"</h2>");
+                out.println("<h4>"+mensagem+"</h4>");
             }
         %>
   
         <!--<h2><%= mensagem%></h2>-->
         
-  <a href="index.html" id="link"> Voltar para Home </a> <br/>
+  
   
         
     </body>
