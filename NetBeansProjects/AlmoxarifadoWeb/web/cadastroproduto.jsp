@@ -24,26 +24,27 @@
             <table>
                 <tr>               
                     <th>Codigo:</th> 
-                    <th><input type="text" name="codigo"/></th>                          
+                    <th><input type="text" name="codigo" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.codigo:''}"/></th>                          
                 </tr>
                 <tr> 
                     <th>Nome:</th>
-                    <th> <input type="text" name="nome"/></th>                    
+                    <th> <input type="text" name="nome" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.nome:''}"/></th>                    
                 </tr>
                 <tr>
                     <th>Marca:</th>
-                    <th><input type="text" name="marca"/></th>
+                    <th><input type="text" name="marca" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.marca:''}"/></th>
                 </tr>
                 <tr>
                     <th>Categoria:</th>
-                    <th><input type="text" name="categoria"  maxlength="50"/></th>                    
+                    <th><input type="text" name="categoria" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.categoria:''}"/></th>                    
                 </tr>
                 <tr>
                     <th>Descrição:</th>
-                    <th><textarea name="descricao" rows="4" cols="30" maxlength="50"></textarea></th>
+                    <th><textarea name="descricao" rows="4" cols="30" maxlength="50">   ${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.descricao:''}</textarea></th>
                 </tr>
                 <tr>
-                    <th><input type="submit" class="btn btn-primary" value="cadastrar"/></th>
+                    <input type="hidden" name="${(param.redirect != null && param.redirect eq 'atualiza')?'atualizar':'cadastrar'}" value="1"/>
+                    <th><input type="submit" class="btn btn-primary" value="${(param.redirect != null && param.redirect eq 'atualiza')?'atualizar':'cadastrar'}"/></th>
                 </tr>               
             </table>
         </form>    

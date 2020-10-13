@@ -15,7 +15,7 @@
         <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Produto Cadastrado</h1>
+<!--        <h4>Produto Cadastrado</h4>-->
         
         <%
             Produto produto = (Produto)request.getAttribute("produto");
@@ -23,7 +23,7 @@
         %>
         <table border="1">
             <tr>
-                <th>Código</th><td><%= produto.getCodigo()%></td>
+                <th>Código</th><td style="width:300px" ><%= produto.getCodigo()%></td>
             </tr>
             <tr>
                 <th>Nome</th><td><%= produto.getNome()%></td>
