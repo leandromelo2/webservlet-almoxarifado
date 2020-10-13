@@ -63,7 +63,7 @@ public class FuncionarioServlet extends HttpServlet {
        
         HttpSession session = request.getSession();
         
-        session.setAttribute("msg", "O Funcionario " + f.getNome() + " foi cadastrado(a) no "+ f.getDepartamento()+" com sucesso!");
+        session.setAttribute("msgfcadastrado", "O Funcionario " + f.getNome() + " foi cadastrado(a) no "+ f.getDepartamento()+" com sucesso!");
         
         response.sendRedirect("funcionarios.jsp");
         

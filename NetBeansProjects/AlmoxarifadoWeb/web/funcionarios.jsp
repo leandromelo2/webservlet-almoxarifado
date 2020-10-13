@@ -20,13 +20,13 @@
         <a href="listarfuncionarios.jsp" id="link"> Lista de funcionarios cadastrados</a>
         <h3>Funcionário cadastrado!</h3>
         <%
-            String mensagem = (String)session.getAttribute("msg");
-            if(mensagem != null){
-                out.println("<h4>"+mensagem+"</h4>");
+            String msgfcadastrado = (String)session.getAttribute("msgfcadastrado");
+            if(msgfcadastrado != null){
+                out.println("<h4>"+msgfcadastrado+"</h4>");
             }
         %>
   
-        <!--<h2><%= mensagem%></h2>-->
+        
         
   
   

@@ -35,7 +35,19 @@ public class ProdutoServletNew extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+        String redirect = request.getParameter("redirect");
+        
+        Produto p = RepositorioProdutos.getCurrentInstance().read(codigo); 
+        
+        request.setAttribute("produto", p); // sendRedirect manda uma nova requisição, e é perdido as informações do request e response 
+        
+        //forward - pega o estado da requisição e envia para outra página
+        getServletContext().getRequestDispatcher("/produtos.jsp").forward(request,response);
+           
+        
+        
     }
 
     /**

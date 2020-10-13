@@ -21,8 +21,8 @@
         <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
         <!-- JS, Popper.js, and jQuery -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+        <!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>-->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <script type="text/javacript" src="resources/bootstrap/js/bootstrap.min.js"></script>  
 
@@ -34,8 +34,13 @@
         <%
             String mensagem = (String) session.getAttribute("msg");
             if (mensagem != null) {
-                out.println("<h4>" + mensagem + "</h4>");
+               out.print("<script>");
+             out.println("alert('" + mensagem + " ');");
                 session.removeAttribute("msg");
+                out.print("</script>");
+ 
+            
+           
             }
         %>
 
@@ -61,40 +66,93 @@
         -->
         
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            Cadastrar produto
-        </button>
+        
+<!--        <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">Cadastrar produto</button>-->
+        <button  onclick="modalopen()" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">Cadastrar produto</button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div id="ModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Cadastro de Produto</h5>
+                        <h5 class="modal-title" id="ModalLongTitle">Cadastro de Produto</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        
                         <jsp:include page="cadastroproduto.jsp"/>
-
+                        
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                        <button onclick="modalclose()" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        
                         <!--<button type="button" class="btn btn-primary" value="cadastrar">Cadastrar</button>-->
                     </div>
                 </div>
             </div>
-        </div>                            
+        </div> 
+                        
+                        <!-- Modal2 visualizar -->
+<!--        <div id="ModalCenter2" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLongTitle">Cadastro de Produto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                   <%--     <%@include file="visualizaproduto.jsp" %>   --%>
+                        <%--<jsp:include page="visualizarproduto.jsp"/>--%>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button onclick="modalclose2()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" value="cadastrar">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>            
+-->
 
+<!--<div id="ModalCenter2" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white" aria-hidden="true">-->
+ 
+<div id="ModalCenter2" style="position: absolute; top: 50px; left: 400px; background: write" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document2">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Detalhes do produto</h5>
+                
+            </div>
+            <div class="modal-body">
+                <%@include file="visualizaproduto.jsp" %>
+            </div>
+            <div class="modal-footer">
+         <button onclick="modal2close()"class="btn btn-secondary">Fechar</button>
+         
+                        
+        </div>
+       </div> 
+    </div>
+</div>
+
+            
+            
+<div class="container">
         <%
             List<Produto> produtos = RepositorioProdutos.getCurrentInstance().readAll();
         %>
 
-        <table class="border" style="position: absolute; top: 150px; left: 20px;border: 1px black solid; background: white" >
+        <!--<table class="border" style="position: absolute; top: 150px; left: 20px;border: 1px black solid; background: white" >-->
+        <table class="border" style="top: 150px; left: 20px">
             <tr>
-                <th style="width:100px ">Código</th><th style="width:120px">Nome</th><th style="width:120px">Marcar</th><th style="width:120px">Categoria</th><th style="width:300px">Operações</th>
-            </tr>
+                <th style="width:100px ">Código</th><th style="width:120px">Nome</th><th style="width:120px">Marcar</th><th style="width:120px">Categoria</th><th style="width:200px">Operações</th>
+             </tr>
 
             <%
                 for (Produto p : produtos) {
@@ -105,6 +163,7 @@
                 <td class="border"><%= p.getNome()%></td>
                 <td class="border"><%= p.getMarca()%></td>
                <td class="border"><%= p.getCategoria()%></td>
+               <td class="border"><a href="ProdutoServletNew?codigo=<%= p.getCodigo()%>&redirect=visualiza">visualizar</a></td>    
             </tr>
             <%
                 }
@@ -112,22 +171,41 @@
 
         </table>
              
-
+</div>
 
         <script>
 
-//            var modal = document.getElementById("modal");
-//
-//            document.body.removeChild(modal);
-//
-//            function modalclose() {
-//                document.body.removeChild(modal);
-//            }
-//
-//            function modalopen() {
-//                document.body.appendChild(modal);               
-//               
-//            }
+            var modalcenter = document.getElementById("ModalCenter");
+
+            
+            
+            var modalcenter2 = document.getElementById("ModalCenter2");
+            
+            <%
+                String redirect = request.getParameter("redirect");
+                
+                if(redirect == null){
+            %>
+                document.body.removeChild(modalcenter);
+                document.body.removeChild(modalcenter2);
+             
+            <% }else if(redirect.equals("visualiza")){ %>
+                document.body.removeChild(modalcenter);
+            <% }else{ %>
+                document.body.removeChild(modalcenter2);
+            <% } %>
+
+            function modalclose() {
+                document.body.removeChild(modalcenter);
+            }
+            
+            function modal2close() {
+                document.body.removeChild(modalcenter2);
+            }
+
+            function modalopen() {
+                document.body.appendChild(modalcenter);
+            }
 
         </script>
 
