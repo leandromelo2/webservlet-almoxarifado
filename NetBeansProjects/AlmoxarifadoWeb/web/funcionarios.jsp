@@ -46,7 +46,7 @@
      
          <div id="modal" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
 
-            <jsp:include page="cadastrofuncionario.jsp"/>
+            <jsp:include page="atualizafuncionario.jsp"/>
             <br/>
             <button onclick="modalclose();btn1()">close</button>
         </div>

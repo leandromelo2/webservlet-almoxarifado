@@ -31,7 +31,7 @@
                 <th>Nome:</th><td><%= funcionario.getNome()%></td>
             </tr>
             <tr style="border:1px solid black">
-                <th>Marca:</th><td><%= funcionario.getDepartamento()%></td>
+                <th>Departamento:</th><td><%= funcionario.getDepartamento()%></td>
             </tr>           
         </table>
             
