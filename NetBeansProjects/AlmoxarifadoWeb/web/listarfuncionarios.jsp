@@ -21,6 +21,7 @@
     <body>
         <a href="index.html" id="link"> Página Inicial </a> <br/>
         <a href="cadastrofuncionario.jsp" id="link"> Cadastro de funcionário</a> <br/>
+        <a href="funcionarios.jsp" id="link"> Funcionários</a> <br/>
         <h3>Visualização de funcionários cadastrados</h3>
     <%
         List<Funcionario> funcionarios = RepositorioFuncionario.getCurrentInstance().readAll();
@@ -32,8 +33,7 @@
 
         </tr>
        <%
-       for (Funcionario f: funcionarios){
-       
+       for (Funcionario f: funcionarios){       
        %>
        <tr>
            <td class="border"><%= f.getCodigo() %></td>
@@ -43,12 +43,6 @@
        <%
        }
        %>
-        
-        
     </table>
-    
-    
-    
-    
     </body>
 </html>

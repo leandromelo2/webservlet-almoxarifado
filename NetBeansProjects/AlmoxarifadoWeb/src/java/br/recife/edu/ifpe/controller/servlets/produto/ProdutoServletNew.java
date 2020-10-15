@@ -38,18 +38,15 @@ public class ProdutoServletNew extends HttpServlet {
         
         int codigo = Integer.parseInt(request.getParameter("codigo"));
         
-//        String redirect = request.getParameter("redirect"); //usado na implementação da função visualizar. linha desnecessario pq a leitura do redirect será feito na página de visualização e na de cadastro que fará alteração - 14 - alterando produto com JSP
+//       String redirect = request.getParameter("redirect"); //usado na implementação da função visualizar. linha desnecessario pq a leitura do redirect será feito na página de visualização e na de cadastro que fará alteração - 14 - alterando produto com JSP
         
         Produto p = RepositorioProdutos.getCurrentInstance().read(codigo); 
         
         request.setAttribute("produto", p); // sendRedirect manda uma nova requisição, e é perdido as informações do request e response 
         
-        //forward - pega o estado da requisição e envia para outra página
-        getServletContext().getRequestDispatcher("/produtos.jsp").forward(request,response);
-           
-        
-        
-    }
+//        forward - pega o estado da requisição e envia para outra página
+        getServletContext().getRequestDispatcher("/produtos.jsp").forward(request,response);  
+        }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -104,6 +101,23 @@ public class ProdutoServletNew extends HttpServlet {
 
     }
 
+    @Override
+     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        super.doDelete(request, response); //To change body of generated methods, choose Tools | Templates.
+        
+        int cod = Integer.parseInt(request.getParameter("codigo"));
+        
+        Produto p = RepositorioProdutos.getCurrentInstance().read(cod);
+        
+        RepositorioProdutos.getCurrentInstance().delete(p);
+        
+        HttpSession session = request.getSession();
+        
+        session.setAttribute("msg", "O produto "+p.getNome()+" foi deletado!");
+        
+    }   
+
+    
     /**
      * Returns a short description of the servlet.
      *

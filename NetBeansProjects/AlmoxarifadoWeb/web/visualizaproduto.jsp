@@ -15,29 +15,31 @@
         <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-<!--        <h4>Produto Cadastrado</h4>-->
+        <h4>Detalhes do produtos</h4> </br>
         
         <%
             Produto produto = (Produto)request.getAttribute("produto");
             if (produto != null) {
         %>
-        <table border="1">
-            <tr>
-                <th>Código</th><td style="width:300px" ><%= produto.getCodigo()%></td>
+        
+        <table style="width:400px"  >            
+            <tr style="border:1px solid black">
+                <th>Código:</th><td><%= produto.getCodigo()%></td>
             </tr>
-            <tr>
-                <th>Nome</th><td><%= produto.getNome()%></td>
+            <tr style="border:1px solid black">
+                <th>Nome:</th><td><%= produto.getNome()%></td>
             </tr>
-            <tr>
-                <th>Marca</th><td><%= produto.getMarca()%></td>
+            <tr style="border:1px solid black">
+                <th>Marca:</th><td><%= produto.getMarca()%></td>
             </tr>
-            <tr>
-                <th>Categoria</th><td><%= produto.getCategoria()%></td>
+            <tr style="border:1px solid black">
+                <th>Categoria:</th><td><%= produto.getCategoria()%></td>
             </tr>
-            <tr>
-                <th>Descrição</th><td><%= produto.getDescricao()%></td>
+            <tr style="border:1px solid black; length:500px;">
+                <th>Descrição:</th><td><%= produto.getDescricao()%></td>
             </tr>
         </table>
+            
         <% }%>        
     </body>
 </html>

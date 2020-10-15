@@ -32,7 +32,7 @@
     
     <body>
     <a href="index.html" id="link"> Página Inicial </a> <br/>  
-        <h3>Produtos cadastrados</h3>
+        
         
         <%
             String mensagem = (String) session.getAttribute("msg");
@@ -46,9 +46,11 @@
            
             }
         %>
-  
-        <button  onclick="modalopen2()" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">Cadastrar produto</button>
-                <!-- Modal -->
+     
+        <button  onclick="modalopen2()" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">Cadastrar produto</button> <br/> 
+        <h4>Produtos cadastrados</h4>
+
+        <!-- Modal -->
         <div id="ModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -59,40 +61,40 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        
+
                         <form method="post" action= "ProdutoServletNew">
-            <table>
-                <tr>               
-                    <th>Codigo:</th> 
-                    <th><input type="text" name="codigo"/></th>                          
-                </tr>
-                <tr> 
-                    <th>Nome:</th>
-                    <th> <input type="text" name="nome"/></th>                    
-                </tr>
-                <tr>
-                    <th>Marca:</th>
-                    <th><input type="text" name="marca"/></th>
-                </tr>
-                <tr>
-                    <th>Categoria:</th>
-                    <th><input type="text" name="categoria"  maxlength="50"/></th>                    
-                </tr>
-                <tr>
-                    <th>Descrição:</th>
-                    <th><textarea name="descricao" rows="4" cols="30" maxlength="50"></textarea></th>
-                </tr>
-                <tr>
-                    <th><input type="submit" class="btn btn-primary" value="cadastrar"/></th>
-                </tr>               
-            </table>
-        </form>    
-                        
+                            <table>
+                                <tr>               
+                                    <th>Codigo:</th> 
+                                    <th><input type="text" name="codigo" placeholder="Apenas Números" onkeypress="return event.charCode >= 48 && event.charCode <= 57" /></th>                          
+                                </tr>
+                                <tr> 
+                                    <th>Nome:</th>
+                                    <th> <input type="text" name="nome"required/></th>                    
+                                </tr>
+                                <tr>
+                                    <th>Marca:</th>
+                                    <th><input type="text" name="marca"required/></th>
+                                </tr>
+                                <tr>
+                                    <th>Categoria:</th>
+                                    <th><input type="text" name="categoria"  maxlength="50"required/></th>                    
+                                </tr>
+                                <tr>
+                                    <th>Descrição:</th>
+                                    <th><textarea name="descricao" rows="4" cols="30" maxlength="50"></textarea></th>
+                                </tr>
+                                <tr>
+                                    <th><input type="submit" class="btn btn-primary" value="cadastrar"/></th>
+                                </tr>               
+                            </table>
+                        </form>    
+
                     </div>
                     <div class="modal-footer">
-<!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                        <!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
                         <button onclick="modalclose()" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        
+
                         <!--<button type="button" class="btn btn-primary" value="cadastrar">Cadastrar</button>-->
                     </div>
                 </div>
@@ -102,24 +104,20 @@
         
         
         
-        <button onclick="modalopen()">novo produto</button>
+        <!--<button onclick="modalopen()">novo produto</button>-->
         <div id="modal" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
 
             <jsp:include page="cadastroproduto.jsp"/>
             <br/>
-            <button href="produtos.jsp" onclick="modalclose()">close</button>
+            <button onclick="modalclose();btn1()">close</button>
         </div>
            
         <div id="modal2" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
-
-            <%@include file="visualizaproduto.jsp" %>
             
+            <%@include file="visualizaproduto.jsp" %>     
             <br/>
-            <button id="btn1" onclick="modal2close()">close</button>
+            <button id="btn1" onclick="modal2close();btn1()">close</button>
         </div>
-            
-
-            
             
 
         <%
@@ -128,7 +126,7 @@
 
         <!--<table class="border" style="position: absolute; top: 150px; left: 20px;border: 1px black solid; background: white" >-->
         <table class="border" style="top: 150px; left: 20px">
-            <tr border="1">
+            <tr class="table-row p-2 bg-primary text-white">
                 <th style="width:100px ">Código</th><th style="width:120px">Nome</th><th style="width:120px">Marcar</th><th style="width:120px">Categoria</th><th style="width:200px">Operações</th>
              </tr>
 
@@ -136,13 +134,14 @@
                 for (Produto p : produtos) {
             %>
 
-            <tr border="1">
+            <tr style="border:1px solid black">
                 <td><%= p.getCodigo()%></td>
                 <td><%= p.getNome()%></td>
                 <td><%= p.getMarca()%></td>
                 <td><%= p.getCategoria()%></td>
                 <td><a href="ProdutoServletNew?codigo=<%= p.getCodigo()%>&redirect=visualiza">visualizar</a>
-                <a href="ProdutoServletNew?codigo=<%= p.getCodigo()%>&redirect=atualiza">atualizar</a></td>    
+                <a href="ProdutoServletNew?codigo=<%= p.getCodigo()%>&redirect=atualiza">atualizar</a>
+                <a href="#" onclick="deleteProduto(<%= p.getCodigo()%>)">deletar</a></td>   
             </tr>
             <%
                 }
@@ -158,6 +157,8 @@
             var modal2 = document.getElementById("modal2");
             
             var modalcenter = document.getElementById("ModalCenter");
+            
+           
             
             <%
                 String redirect = request.getParameter("redirect");
@@ -175,21 +176,33 @@
 
             function modalclose() {
                 document.body.removeChild(modal);
-                href="produto.jsp";
+                
             }
             
             function modal2close() {
-                document.body.removeChild(modal2);
-                 href="produto.jsp";
+                document.body.removeChild(modal2);                 
             }
 
             function modalopen() {
-                document.body.appendChild(modal);
+             setTimeout(function(){document.body.appendChild(modal);},4000);                         
             }
-            function modalopen() {
+            
+            function modalopen2() {
                 document.body.appendChild(modalcenter);
             }
-
+            
+            
+            function btn1() {
+                 location.replace("produtos.jsp");
+            }
+                             
+                         
+            function deleteProduto(codigo){
+                fetch("ProdutoServletNew?codigo="+codigo,{method:'delete'})
+                        .then(function(response){
+                            location.reload();
+                });
+            };
         </script>
 
     </body>

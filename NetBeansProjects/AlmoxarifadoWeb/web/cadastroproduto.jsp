@@ -24,7 +24,7 @@
             <table>
                 <tr>               
                     <th>Codigo:</th> 
-                    <th><input type="text" name="codigo" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.codigo:''}"/></th>                          
+                    <th><input type="text" name="codigo" placeholder="Apenas Números"  readonly="true" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.codigo:''}"/></th>                          
                 </tr>
                 <tr> 
                     <th>Nome:</th>
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <th>Categoria:</th>
-                    <th><input type="text" name="categoria" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.categoria:''}"/></th>                    
+                        <th><input type="text" name="categoria" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.categoria:''}"/></th>                    
                 </tr>
                 <tr>
                     <th>Descrição:</th>

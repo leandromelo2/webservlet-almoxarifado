@@ -9,6 +9,7 @@ import br.recife.edu.ifpe.model.classes.Funcionario;
 import br.recife.edu.ifpe.model.repositorios.RepositorioFuncionario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.DispatcherType;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +35,13 @@ public class FuncionarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+    int codigo = Integer.parseInt(request.getParameter("codigo"));
+    
+    Funcionario f = RepositorioFuncionario.getCurrentInstance().read(codigo);
+    request.setAttribute("funcionario", f);
+    
+    getServletContext().getRequestDispatcher("/funcionarios.jsp").forward(request,response);
+    
     }
 
     /**
@@ -53,22 +60,57 @@ public class FuncionarioServlet extends HttpServlet {
         String nome = request.getParameter("nome");
         String departamento = request.getParameter("departamento");
         
-        Funcionario f = new Funcionario();
+        String a = request.getParameter ("atualizar");
         
+        Funcionario f = new Funcionario();
+                
         f.setCodigo(codigo);
         f.setNome(nome);
         f.setDepartamento(departamento);
         
-        RepositorioFuncionario.getCurrentInstance().create(f);
-       
         HttpSession session = request.getSession();
         
-        session.setAttribute("msgfcadastrado", "O Funcionario " + f.getNome() + " foi cadastrado(a) no "+ f.getDepartamento()+" com sucesso!");
+        if (a == null) {
+            RepositorioFuncionario.getCurrentInstance().create(f);
+            
+            //
+            
+            
+            
+            
         
+        session.setAttribute("msgf", "O Funcionario " + f.getNome() + " foi cadastrado(a) no "+ f.getDepartamento()+" com sucesso!");
+        
+         } else {
+        
+         RepositorioFuncionario.getCurrentInstance().update(f);
+            session.setAttribute("msgf", "Informações sobre o funcionario " + f.getNome() + " foi atualizado com sucesso!");
+
+            
+        }
         response.sendRedirect("funcionarios.jsp");
         
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        super.doDelete(request, response); //To change body of generated methods, choose Tools | Templates.
+        
+        int c = Integer.parseInt(request.getParameter("codigo"));
+        
+        Funcionario f = RepositorioFuncionario.getCurrentInstance().read(c);
+        
+        RepositorioFuncionario.getCurrentInstance().delete(f);
+        
+        HttpSession session = request.getSession();
+        
+        session.setAttribute("msgf", "O Funcionário "+f.getNome()+" foi deletado!");
+        
+    
         
     }
+    
+    
 
     /**
      * Returns a short description of the servlet.
