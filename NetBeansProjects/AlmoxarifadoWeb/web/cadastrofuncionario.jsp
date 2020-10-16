@@ -9,17 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
-        <title>AW-CadastroFuncionario</title>  
+        <title>CadastroFuncionario</title>  
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javacript" src="resources/bootstrap/js/bootstrap.min.js"></script>
         <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         
-        <a href="index.html" id="link"> Página Inicial </a> <br/>
-         <a href="funcionarios.jsp" id="link"> Gerenciamento de funcionários</a>
+         <!--<a href="index.html" id="link"> Página Inicial </a> <br/>-->
+         <!--<a href="funcionarios.jsp" id="link"> Gerenciamento de funcionários</a>-->
          
-        <h3>Cadastro de funcionário</h3>
+<!--        <h3>Cadastro de funcionário</h3>-->
 
         <form method="post" action= "FuncionarioServlet">
            

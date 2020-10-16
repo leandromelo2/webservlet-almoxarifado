@@ -49,6 +49,8 @@
             }
         %>
      
+<!--        MODAL CADASTRAR PRODUTO (CREATE)-->
+        
         <button  onclick="modalopen2()" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">Cadastrar produto</button> <br/> 
         <h4>Produtos cadastrados</h4>
 
@@ -105,8 +107,8 @@
         
         
         
-        
-        <!--<button onclick="modalopen()">novo produto</button>-->        
+        <!--Modal atualizar produto (UPDATE)-->
+       
         <div id="modal" style="position: absolute; top: 200px; left: 200px;" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">  
@@ -117,7 +119,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action= "ProdutoServletNew">
+        <form method="post" action= "ProdutoServletNew">
             <table>
                 <tr>               
                     <th>Codigo:</th> 
@@ -154,6 +156,8 @@
             </div>
         </div>
            
+                <!--Modal visualizar produto (READ)-->
+                
         <div id="modal2" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
             
             <h4>Detalhes do produtos</h4> </br>

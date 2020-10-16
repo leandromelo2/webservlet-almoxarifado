@@ -30,10 +30,10 @@
     <body>
         <a href="index.html" id="link"> Página Inicial </a> <br/> <br/>
          
-            <a class="d-inline p-2 bg-primary text-white" href="cadastrofuncionario.jsp"> Cadastrar funcionários </a> <br/> <br/>
+            <!--<a class="d-inline p-2 bg-primary text-white" href="cadastrofuncionario.jsp"> Cadastrar funcionários </a> <br/> <br/>-->
       
         <!--<a href="listarfuncionarios.jsp" id="link"> Lista de funcionarios cadastrados</a>-->
-        <h4>Funcionários cadastrados</h4> 
+   
         <%--
         <%
             String msgfcadastrado = (String)session.getAttribute("msgfcadastrado");
@@ -53,15 +53,48 @@
             
             }
         %>
+        
+        <!--Modal CADASTRAR funcionario (CREATE)-->
+        
+    <button  onclick="modalopen2()" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">Cadastrar Funcionário</button> <br/> 
+        <h4>Funcionários Cadastrados</h4>
+
+        <!-- Modal -->
+        <div id="ModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLongTitle">Cadastro de funcionário</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <jsp:include page="cadastrofuncionario.jsp"/>
+
+                    </div>
+                    <div class="modal-footer">
+                        <!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                        <button onclick="modalclose()" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+                        <!--<button type="button" class="btn btn-primary" value="cadastrar">Cadastrar</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>     
+        
+        
+                  <!--Modal ALTERAR funcionario (UPDATE)-->
      
-         <div id="modal" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
+          <div id="modal" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
 
             <form method="post" action= "FuncionarioServlet">
            
             <table   style="text-align:right;">
                 <tr>               
                     <th>Codigo:</th> 
-                    <th><input type="text" name="codigo"  placeholder="Apenas Números" onkeypress="return event.charCode >= 48 && event.charCode <= 57"value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.codigo:''}"/></th></th>                          
+                    <th><input type="text" name="codigo"  placeholder="Apenas Números" readonly="true" onkeypress="return event.charCode >= 48 && event.charCode <= 57"value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.codigo:''}"/></th></th>                          
                 </tr>
                 <tr> 
                     <th>Nome:</th>
@@ -92,6 +125,11 @@
             <button onclick="modalclose();btn1()">close</button>
         </div>
            
+                
+                
+                <!--Visualizar detalhes do funcionário (READ)-->
+                
+                
         <div id="modal2" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
             
             <h4>Detalhes do funcionario</h4> </br>
