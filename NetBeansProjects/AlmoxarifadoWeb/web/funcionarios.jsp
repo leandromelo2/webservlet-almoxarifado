@@ -87,7 +87,18 @@
         
                   <!--Modal ALTERAR funcionario (UPDATE)-->
      
-          <div id="modal" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
+<!--          <div id="modal" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">-->
+
+<div id="modal" style="position: absolute; top: 200px; left: 200px;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">  
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLongTitle">Atualizar Produto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<!--                            <span aria-hidden="true">&times;</span>-->
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
             <form method="post" action= "FuncionarioServlet">
            
@@ -122,7 +133,13 @@
                 </tr>               
             </table>
         </form> 
-            <button onclick="modalclose();btn1()">close</button>
+            </div>
+                    <div class="modal-footer">
+                        <button onclick="modalclose();btn1()">close</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
            
                 
