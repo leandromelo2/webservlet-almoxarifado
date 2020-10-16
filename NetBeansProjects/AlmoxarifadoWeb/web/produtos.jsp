@@ -16,11 +16,8 @@
         
         <title>Produtos</title>        
    
+        <!--Ajax--> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        
-         <!--CSS only--> 
-        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         
          <!--JS, Popper.js, and jQuery--> 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -28,9 +25,14 @@
         <script type="text/javacript" src="resources/bootstrap/js/bootstrap.min.js"></script> 
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
      
+        <!--CSS only--> 
+        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
+        
     </head>
     
     <body>
+     
     <a href="index.html" id="link"> Página Inicial </a> <br/>  
         
         
@@ -104,12 +106,26 @@
         
         
         
-        <!--<button onclick="modalopen()">novo produto</button>-->
-        <div id="modal" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
+        <!--<button onclick="modalopen()">novo produto</button>-->        
+        <div id="modal" style="position: absolute; top: 200px; left: 200px;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">  
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLongTitle">Atualizar Produto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<!--                            <span aria-hidden="true">&times;</span>-->
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <jsp:include page="cadastroproduto.jsp"/>            
+                        <br/>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="modalclose();btn1()">close</button>
+                    </div>
 
-            <jsp:include page="cadastroproduto.jsp"/>
-            <br/>
-            <button onclick="modalclose();btn1()">close</button>
+                </div>
+            </div>
         </div>
            
         <div id="modal2" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
@@ -158,7 +174,7 @@
             
             var modalcenter = document.getElementById("ModalCenter");
             
-           
+          
             
             <%
                 String redirect = request.getParameter("redirect");
@@ -184,8 +200,12 @@
             }
 
             function modalopen() {
-             setTimeout(function(){document.body.appendChild(modal);},4000);                         
+                document.body.appendChild(modal);                         
             }
+            
+//             function modalopen() {
+//               setTimeout(function(){document.body.appendChild(modal);},4000);                         
+//             }
             
             function modalopen2() {
                 document.body.appendChild(modalcenter);
