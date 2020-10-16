@@ -117,8 +117,34 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <jsp:include page="cadastroproduto.jsp"/>            
-                        <br/>
+                        <form method="post" action= "ProdutoServletNew">
+            <table>
+                <tr>               
+                    <th>Codigo:</th> 
+                    <th><input type="text" name="codigo" placeholder="Apenas Números"  readonly="true" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.codigo:''}"/></th>                          
+                </tr>
+                <tr> 
+                    <th>Nome:</th>
+                    <th> <input type="text" name="nome" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.nome:''}"/></th>                    
+                </tr>
+                <tr>
+                    <th>Marca:</th>
+                    <th><input type="text" name="marca" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.marca:''}"/></th>
+                </tr>
+                <tr>
+                    <th>Categoria:</th>
+                        <th><input type="text" name="categoria" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.categoria:''}"/></th>                    
+                </tr>
+                <tr>
+                    <th>Descrição:</th>
+                    <th><textarea name="descricao" rows="4" cols="30" maxlength="50">   ${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.descricao:''}</textarea></th>
+                </tr>
+                <tr>
+                    <input type="hidden" name="${(param.redirect != null && param.redirect eq 'atualiza')?'atualizar':'cadastrar'}" value="1"/>
+                    <th><input type="submit" class="btn btn-primary" value="${(param.redirect != null && param.redirect eq 'atualiza')?'atualizar':'cadastrar'}"/></th>
+                </tr>               
+            </table>
+        </form>    
                     </div>
                     <div class="modal-footer">
                         <button onclick="modalclose();btn1()">close</button>
@@ -130,8 +156,32 @@
            
         <div id="modal2" style="position: absolute; top: 200px; left: 200px;border: 1px black solid; background: white">
             
-            <%@include file="visualizaproduto.jsp" %>     
-            <br/>
+            <h4>Detalhes do produtos</h4> </br>
+        
+        <%
+            Produto produto = (Produto)request.getAttribute("produto");
+            if (produto != null) {
+        %>
+        
+        <table style="width:400px"  >            
+            <tr style="border:1px solid black">
+                <th>Código:</th><td><%= produto.getCodigo()%></td>
+            </tr>
+            <tr style="border:1px solid black">
+                <th>Nome:</th><td><%= produto.getNome()%></td>
+            </tr>
+            <tr style="border:1px solid black">
+                <th>Marca:</th><td><%= produto.getMarca()%></td>
+            </tr>
+            <tr style="border:1px solid black">
+                <th>Categoria:</th><td><%= produto.getCategoria()%></td>
+            </tr>
+            <tr style="border:1px solid black; length:500px;">
+                <th>Descrição:</th><td><%= produto.getDescricao()%></td>
+            </tr>
+        </table>
+            
+        <% }%>
             <button id="btn1" onclick="modal2close();btn1()">close</button>
         </div>
             
