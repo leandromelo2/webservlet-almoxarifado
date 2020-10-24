@@ -6,6 +6,7 @@
 package br.recife.edu.ifpe.model.repositorios;
 
 import br.recife.edu.ifpe.model.classes.Produto;
+import java.nio.charset.CodingErrorAction;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class RepositorioProdutos {
     }
     
     public void create(Produto p){
+     
+        
         this.produtos.add(p);
     }
     

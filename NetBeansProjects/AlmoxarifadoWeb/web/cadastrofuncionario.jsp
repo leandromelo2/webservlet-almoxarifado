@@ -26,11 +26,13 @@
             <table   style="text-align:right;">
                 <tr>               
                     <th>Codigo:</th> 
-                    <th><input type="text" name="codigo"  placeholder="Apenas Números" onkeypress="return event.charCode >= 48 && event.charCode <= 57"value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.codigo:''}"/></th></th>                          
+                    <th><input type="text" name="codigo"  placeholder="Apenas Números" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                               <%--      value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.codigo:''}"   --%>  /></th></th>                          
                 </tr>
                 <tr> 
                     <th>Nome:</th>
-                    <th> <input type="text" name="nome" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.nome:''}"/></th>                    
+                    <th> <input type="text" name="nome" 
+                               <%--   value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.nome:''}" --%>  /></th>                    
                 </tr>              
                  <!--  <tr>
                     <th>Departamento:</th>
@@ -48,9 +50,13 @@
                     </th>
                 </tr>
                 <th></th>
-                <input type="hidden" name="${(param.redirect != null && param.redirect eq 'atualiza')?'atualizar':'cadastrar'}" value="1"/>
+<!--             
+    <%--  
+                     <input type="hidden" name="${(param.redirect != null && param.redirect eq 'atualiza')?'atualizar':'cadastrar'}" value="1"/>
                  <th><input type="submit" class="btn btn-primary" value="${(param.redirect != null && param.redirect eq 'atualiza')?'atualizar':'cadastrar'}"/></th>
-                <!--<th><input type="submit" class="btn btn-primary" value="cadastrar"/></th>-->
+           --%> 
+-->
+                <th><input type="submit" class="btn btn-primary" value="cadastrar"/></th>
                 </tr>               
             </table>
         </form>    

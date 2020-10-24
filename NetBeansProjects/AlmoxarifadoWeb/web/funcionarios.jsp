@@ -231,8 +231,12 @@
             }
 
             function modalopen() {
-             setTimeout(function(){document.body.appendChild(modal);},4000);                         
+                document.body.appendChild(modal);                         
             }
+            
+//            function modalopen() {
+//             setTimeout(function(){document.body.appendChild(modal);},4000);                         
+//            }
             
             function modalopen2() {
                 document.body.appendChild(modalcenter);

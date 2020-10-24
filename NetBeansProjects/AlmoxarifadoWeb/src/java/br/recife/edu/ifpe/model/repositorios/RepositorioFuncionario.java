@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author debora
+ * 
  */
 public class RepositorioFuncionario {
     private static RepositorioFuncionario myself = null;

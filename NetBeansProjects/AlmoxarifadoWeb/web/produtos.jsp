@@ -4,6 +4,7 @@
     Author     : leandro melo
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="br.recife.edu.ifpe.model.repositorios.RepositorioProdutos"%>
 <%@page import="br.recife.edu.ifpe.model.classes.Produto"%>
 <%@page import="java.util.List"%>
@@ -33,7 +34,12 @@
     
     <body>
      
-    <a href="index.html" id="link"> Página Inicial </a> <br/>  
+    <a href="index.html" id="link"> Página Inicial </a> <br/> <br/>
+    
+   
+    <c:if test="${2+2==5}">
+        <h1> entrou no if </h1>
+    </c:if>
         
         
         <%
