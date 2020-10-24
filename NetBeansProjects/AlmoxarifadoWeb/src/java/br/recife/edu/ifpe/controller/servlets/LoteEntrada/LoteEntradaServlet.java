@@ -58,7 +58,11 @@ public class LoteEntradaServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPut(req, resp); //To change body of generated methods, choose Tools | Templates.
 
+        // a-22 7m39s
+        String operacao = req.getParameter("operacao");
+        
         int codigo = Integer.parseInt(req.getParameter("codigo"));
+        
         HttpSession session = req.getSession();
 
         LoteEntrada lE = (LoteEntrada) session.getAttribute("loteEntrada");
@@ -69,37 +73,53 @@ public class LoteEntradaServlet extends HttpServlet {
                session.setAttribute("loteEntrada", lE);
 
             }
-           //aula 21 - 9-30
-           boolean controle = false;
-           
-            for (ItemEntrada i: lE.getItens()){
-                if(i.getProduto().getCodigo()== codigo){
-                    i.setQuantidade(i.getQuantidade()+1);
+           // a-22 9m00
+           if (operacao.equals("mais")) {
+            //aula 21 - 9-30
+            boolean controle = false;     
+            for (ItemEntrada i : lE.getItens()) { // incrementa
+                if (i.getProduto().getCodigo() == codigo) {
+                    i.setQuantidade(i.getQuantidade() + 1);
                     controle = true;
+                    session.setAttribute("msglote", "O produto foi incrementado no lote");
+                    break;
                 }
-            
+
             }
             //21 14-00
-            if (!controle){
-            ItemEntrada item = new ItemEntrada();
-            
+            if (!controle) {
+                ItemEntrada item = new ItemEntrada();
+
                 Produto p = RepositorioProdutos.getCurrentInstance().read(codigo);
-                
+
                 item.setProduto(p);
-                item.setCodigo((int)(Math.random()*10000));
+                item.setCodigo((int) (Math.random() * 10000));
                 item.setQuantidade(1);
-                
+
                 lE.addItem(item);
-                
-                session.setAttribute("msg","O produto"+ p.getNome() +"foi inserido no lote");
-            
-            }else{
-            
-             session.setAttribute("msg","O produto foi incrementado no lote");
+
+                session.setAttribute("msglote", "O produto " + p.getNome() + "foi inserido no lote");
+
             }
-            
-            
-            
+            //decremento no item
+        } else if(operacao.equals("menos")){
+        
+            for(ItemEntrada i: lE.getItens()){
+                if(i.getProduto().getCodigo() == codigo){
+                    
+                    if(i.getQuantidade() == 1){
+                        lE.getItens().remove(i);                        
+                        if(lE.getItens().size()==0){  // a22 - 14m41 - remove a tabela de lote de entrada
+                            session.removeAttribute("loteEntrada");
+                        }
+                        session.setAttribute("msglote", "O produto " + i.getProduto().getNome() + "foi REMOVIDO do lote");
+                        break;
+                    }
+                    i.setQuantidade(i.getQuantidade() - 1);
+                    break;
+                }   
+            }
+        }
     }
     /**
      * Returns a short description of the servlet.

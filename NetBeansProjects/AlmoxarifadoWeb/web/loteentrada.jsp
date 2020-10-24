@@ -16,11 +16,13 @@
     <body>
         <a href="index.html" id="link"> Página Inicial </a> <br/> <br/>
         
-        <h1>Cadastro de Lote de Entrada</h1>
+        <h4>Cadastro de Lote de Entrada</h4>
+        <h3><c:out value="${msglote}"/></h3>
+        <c:remove var="msglote" scope="session"/>
         
         <ifpe:carregaprodutos/>
 
-        
+        <h4>Produtos cadastrados</h4>
         <table>
             <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>inserir</th></tr>
                
@@ -34,7 +36,10 @@
                      </tr>
                 </c:forEach>
         </table>
-       <h2>produtos inserdos no lote de entrada</h2>
+        
+        
+        <c:if test="${loteEntrada != null}"> <%-- tabela dos  'produtos inseridos no lote de entrada' só aparece se for diferente de null  --%>
+       <h2>produtos inseridos no lote de entrada</h2>
             <table border="1">
                 <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th>
                     <th>Quantidade</th><th>inserir</th></tr>
@@ -50,14 +55,21 @@
                     </tr>
                 </c:forEach>
             </table>
-        
+       
+       </c:if>
+       
         <script>
             function adiciona(codigo) {
                 fetch("LoteEntradaServlet?operacao=mais&codigo=" + codigo, {method: "put"})
                         .then(function () {
                             location.reload();
                         });
-                        
+            }
+            function diminui(codigo) {
+                fetch("LoteEntradaServlet?operacao=menos&codigo=" + codigo, {method: "put"})
+                        .then(function () {
+                            location.reload();
+                        });
             }
                         
         </script>
