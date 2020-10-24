@@ -50,12 +50,12 @@
                         <td>${i.produto.marca}</td>
                         <td>${i.produto.categoria}</td>
                         <td>${i.quantidade}</td>
-                        <td><a href="#" class="plus" onclick="diminui(${i.produto.codigo})">-</a>
-                            |<a href="#" class="plus" onclick="adiciona(${i.produto.codigo})">+</a></td>
+                        <td><a href="#" class="plus" onclick="diminui(${i.produto.codigo})"> - </a>
+                            |<a href="#" class="plus" onclick="adiciona(${i.produto.codigo})"> + </a></td>
                     </tr>
                 </c:forEach>
             </table>
-       
+            <button onclick="cadastrar()">cadastrar</button>
        </c:if>
        
         <script>
@@ -68,6 +68,18 @@
             function diminui(codigo) {
                 fetch("LoteEntradaServlet?operacao=menos&codigo=" + codigo, {method: "put"})
                         .then(function () {
+                            location.reload();
+                        });
+            }
+            function cadastrar() {
+                fetch("LoteEntradaServlet", {method: "post"})
+                        .then(function (response) {
+                            if(response.status === 500)
+                                location.reload();
+                            else
+                                location.reload();
+//                                location.href = "loteentradaapresentacao.jsp";
+                        }).catch(function(erro){
                             location.reload();
                         });
             }

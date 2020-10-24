@@ -5,9 +5,13 @@
  */
 package br.recife.edu.ifpe.controller.servlets.LoteEntrada;
 
+import br.recife.edu.ifpe.model.classes.Estoque;
 import br.recife.edu.ifpe.model.classes.ItemEntrada;
+import br.recife.edu.ifpe.model.classes.ItemEstoque;
 import br.recife.edu.ifpe.model.classes.LoteEntrada;
 import br.recife.edu.ifpe.model.classes.Produto;
+import br.recife.edu.ifpe.model.repositorios.RepositorioEstoque;
+import br.recife.edu.ifpe.model.repositorios.RepositorioLoteEntrada;
 import br.recife.edu.ifpe.model.repositorios.RepositorioProdutos;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,6 +56,44 @@ public class LoteEntradaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
+        HttpSession session = request.getSession();
+        
+        LoteEntrada lE = (LoteEntrada)session.getAttribute("loteEntrada");
+        
+        //for para verificar itens no estoque. usar na saída.
+          for(ItemEntrada i: lE.getItens()){
+            if(i.getQuantidade()>10){
+                session.setAttribute("msglote", "Você esta tentando inserir mais de 10 itens do produto "+i.getProduto().getNome()+" no seu lote,"
+                        + "Tente novamente uma menor quantidade");
+                
+                response.sendError(500);
+                
+                return;
+            }
+        }
+        
+        
+        
+        
+        Estoque estoque = RepositorioEstoque.getCurrentInstance().read();
+        
+        for(ItemEntrada i: lE.getItens()){
+            
+            for(ItemEstoque ie: estoque.getItens()){
+                if(i.getProduto().getCodigo() == ie.getProduto().getCodigo()){
+                    ie.adiciona(i.getQuantidade());
+                    break;
+                }
+            }
+            
+        }
+     RepositorioLoteEntrada.getCurrentInstance().create(lE);
+        
+        session.removeAttribute("loteEntrada");
+        
+        session.setAttribute("msglote", "O lote de entrada foi inserido com sucesso!");
+        
+        
     }
 
     @Override
@@ -98,7 +140,7 @@ public class LoteEntradaServlet extends HttpServlet {
 
                 lE.addItem(item);
 
-                session.setAttribute("msglote", "O produto " + p.getNome() + "foi inserido no lote");
+                session.setAttribute("msglote", "O produto " + p.getNome() + " foi inserido no lote");
 
             }
             //decremento no item
