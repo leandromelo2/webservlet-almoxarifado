@@ -13,6 +13,8 @@ public class RepositorioLoteEntrada {
     
     private static RepositorioLoteEntrada myself = null;
     
+    private int lastCode =0;
+    
     private List<LoteEntrada> lotes = null;
     
     private RepositorioLoteEntrada(){
@@ -27,6 +29,7 @@ public class RepositorioLoteEntrada {
     }
     
     public void create(LoteEntrada le){
+        le.setCodigo(lastCode++);
         this.lotes.add(le);
     }
     

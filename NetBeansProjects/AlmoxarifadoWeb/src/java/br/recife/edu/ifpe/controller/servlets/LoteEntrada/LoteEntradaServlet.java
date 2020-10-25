@@ -41,6 +41,26 @@ public class LoteEntradaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+        
+        LoteEntrada loteEntrada = RepositorioLoteEntrada.getCurrentInstance().read(codigo);
+        
+        String responseJSON = "{\"codigo\":"+loteEntrada.getCodigo()+","+
+                "\"descricao\":\""+loteEntrada.getDescricao()+"\",\"itens\":[";
+        for(ItemEntrada item: loteEntrada.getItens()){
+            responseJSON += "{\"codigo\":"+item.getCodigo()+",\"nomeProduto\":\""+item.getProduto().getNome()+"\""
+                    + ",\"quantidade\":"+item.getQuantidade()+"}";
+            if(loteEntrada.getItens().indexOf(item)!=loteEntrada.getItens().size()-1){
+                responseJSON += ",";
+            }
+        }
+        responseJSON += "]}";
+        response.setContentType("text/plain");
+        
+        try(PrintWriter out = response.getWriter()){
+            out.println(responseJSON);
+        }
        
     }
 
@@ -62,7 +82,7 @@ public class LoteEntradaServlet extends HttpServlet {
         
         //for para verificar itens no estoque. usar na saída.
           for(ItemEntrada i: lE.getItens()){
-            if(i.getQuantidade()>10){
+            if(i.getQuantidade()>30){
                 session.setAttribute("msglote", "Você esta tentando inserir mais de 10 itens do produto "+i.getProduto().getNome()+" no seu lote,"
                         + "Tente novamente uma menor quantidade");
                 

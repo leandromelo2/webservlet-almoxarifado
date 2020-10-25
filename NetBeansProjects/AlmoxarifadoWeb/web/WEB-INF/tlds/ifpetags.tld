@@ -30,7 +30,11 @@
       <name>carregaprodutos</name>
       <body-content>scriptless</body-content>
       <tag-class>br.recife.edu.ifpe.controller.tags.CarregaProdutoTag</tag-class>
-
+  </tag>
+   <tag>
+      <name>carregalotesentrada</name>
+      <body-content>scriptless</body-content>
+      <tag-class>br.recife.edu.ifpe.controller.tags.CarregaLoteEntradaTag</tag-class>
   </tag>
   
     

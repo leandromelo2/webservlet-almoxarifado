@@ -77,8 +77,8 @@
                             if(response.status === 500)
                                 location.reload();
                             else
-                                location.reload();
-//                                location.href = "loteentradaapresentacao.jsp";
+//                                location.reload();
+                                location.href = "loteentradaapresentacao.jsp";
                         }).catch(function(erro){
                             location.reload();
                         });
