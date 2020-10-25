@@ -12,6 +12,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lote de Entrada</title>
+        <style>
+            .plus{
+                font-size:15pt;
+                text-decoration:none;
+                color:blue;
+                font-weight:bold;
+            }
+            
+        </style>
     </head>
     <body>
         <a href="index.html" id="link"> Página Inicial </a> <br/> <br/>
@@ -23,7 +32,7 @@
         <ifpe:carregaprodutos/>
 
         <h4>Produtos cadastrados</h4>
-        <table>
+        <table border="2">
             <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>inserir</th></tr>
                
                 <c:forEach var="pAux" items="${produtos}">

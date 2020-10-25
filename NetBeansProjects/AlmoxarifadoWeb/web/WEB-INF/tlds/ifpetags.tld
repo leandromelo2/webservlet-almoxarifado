@@ -20,11 +20,6 @@
           <listener-class>com.mycompany.TagLibListener</listener-class> 
       </listener>
     -->
-  <tag>
-      
-      <name>hello</name>
-      <body-content>empty</body-content> 
-  </tag>
   
  <tag>
       <name>carregaprodutos</name>
@@ -35,6 +30,11 @@
       <name>carregalotesentrada</name>
       <body-content>scriptless</body-content>
       <tag-class>br.recife.edu.ifpe.controller.tags.CarregaLoteEntradaTag</tag-class>
+  </tag>
+   <tag>
+      <name>carregafuncionario</name>
+      <body-content>scriptless</body-content>
+      <tag-class>br.recife.edu.ifpe.controller.tags.CarregaFuncionarioTag</tag-class>
   </tag>
   
     
