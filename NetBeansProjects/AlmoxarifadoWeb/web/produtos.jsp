@@ -58,7 +58,7 @@
 <!--        MODAL CADASTRAR PRODUTO (CREATE)-->
         
         <button  onclick="modalopen2()" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">Cadastrar produto</button> <br/> 
-        <h4>Produtos cadastrados</h4>
+       
 
         <!-- Modal -->
         <div id="ModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
@@ -195,37 +195,44 @@
             <button id="btn1" onclick="modal2close();btn1()">close</button>
         </div>
             
-
-        <%
-            List<Produto> produtos = RepositorioProdutos.getCurrentInstance().readAll();
-        %>
-
-        <!--<table class="border" style="position: absolute; top: 150px; left: 20px;border: 1px black solid; background: white" >-->
-        <table class="border" style="top: 150px; left: 20px">
-            <tr class="table-row p-2 bg-primary text-white">
-                <th style="width:100px ">Código</th><th style="width:120px">Nome</th><th style="width:120px">Marcar</th><th style="width:120px">Categoria</th><th style="width:200px">Operações</th>
-             </tr>
+            
+            
+       
+                <h4>Produtos cadastrados</h4>
 
             <%
-                for (Produto p : produtos) {
+                List<Produto> produtos = RepositorioProdutos.getCurrentInstance().readAll();
             %>
 
-            <tr style="border:1px solid black">
-                <td><%= p.getCodigo()%></td>
-                <td><%= p.getNome()%></td>
-                <td><%= p.getMarca()%></td>
-                <td><%= p.getCategoria()%></td>
-                <td><a href="ProdutoServletNew?codigo=<%= p.getCodigo()%>&redirect=visualiza">visualizar</a>
-                <a href="ProdutoServletNew?codigo=<%= p.getCodigo()%>&redirect=atualiza">atualizar</a>
-                <a href="#" onclick="deleteProduto(<%= p.getCodigo()%>)">deletar</a></td>   
-            </tr>
-            <%
-                }
-            %>
+            <!--<table class="border" style="position: absolute; top: 150px; left: 20px;border: 1px black solid; background: white" >-->
+            <table class="border" style="top: 150px; left: 20px">
+                <tr class="table-row p-2 bg-primary text-white">
+                    <th style="width:100px ">Código</th><th style="width:120px">Nome</th><th style="width:120px">Marcar</th><th style="width:120px">Categoria</th><th style="width:200px">Operações</th>
+                </tr>
 
-        </table>
-             
+                <%
+                    for (Produto p : produtos) {
+                %>
 
+                <tr style="border:1px solid black">
+                    <td><%= p.getCodigo()%></td>
+                    <td><%= p.getNome()%></td>
+                    <td><%= p.getMarca()%></td>
+                    <td><%= p.getCategoria()%></td>
+                    <td><a href="ProdutoServletNew?codigo=<%= p.getCodigo()%>&redirect=visualiza">visualizar</a>
+                        <a href="ProdutoServletNew?codigo=<%= p.getCodigo()%>&redirect=atualiza">atualizar</a>
+                        <a href="#" onclick="deleteProduto(<%= p.getCodigo()%>)">deletar</a></td>   
+                </tr>
+                <%
+                    }
+                %>
+
+            </table>
+
+     
+
+        
+        
         <script>
 
             var modal = document.getElementById("modal");
