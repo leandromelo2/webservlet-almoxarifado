@@ -18,14 +18,14 @@
                 text-decoration:none;
                 color:blue;
                 font-weight:bold;
-            }
-            
+            }            
         </style>
     </head>
     <body>
         <a href="index.html" id="link"> Página Inicial </a> <br/> <br/>
         
         <h4>Cadastro de Lote de Entrada</h4>
+        
         <h3><c:out value="${msglote}"/></h3>
         <c:remove var="msglote" scope="session"/>
         
@@ -48,6 +48,7 @@
         
         
         <c:if test="${loteEntrada != null}"> <%-- tabela dos  'produtos inseridos no lote de entrada' só aparece se for diferente de null  --%>
+            
        <h2>produtos inseridos no lote de entrada</h2>
             <table border="1">
                 <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th>
@@ -59,8 +60,8 @@
                         <td>${i.produto.marca}</td>
                         <td>${i.produto.categoria}</td>
                         <td>${i.quantidade}</td>
-                        <td><a href="#" class="plus" onclick="diminui(${i.produto.codigo})"> - </a>
-                            |<a href="#" class="plus" onclick="adiciona(${i.produto.codigo})"> + </a></td>
+                        <td><a href="#" class="plus" onclick="diminui(${i.produto.codigo})">-</a>
+                            | <a href="#" class="plus" onclick="adiciona(${i.produto.codigo})">+</a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -69,13 +70,13 @@
        
         <script>
             function adiciona(codigo) {
-                fetch("LoteEntradaServlet?operacao=mais&codigo=" + codigo, {method: "put"})
+                fetch("LoteEntradaServlet?operacao=mais&codigo=" + codigo,{method: "put"})
                         .then(function () {
                             location.reload();
                         });
             }
             function diminui(codigo) {
-                fetch("LoteEntradaServlet?operacao=menos&codigo=" + codigo, {method: "put"})
+                fetch("LoteEntradaServlet?operacao=menos&codigo=" + codigo,{method: "put"})
                         .then(function () {
                             location.reload();
                         });

@@ -40,7 +40,26 @@ public class LoteSaidaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+        
+        LoteSaida loteSaida = RepositorioLoteSaida.getCurrentInstance().read(codigo);
+       String responseJSON = "{\"codigo\":"+loteSaida.getCodigo()+","+
+                "\"descricao\":\""+loteSaida.getDescricao()+"\",\"itens\":[";
+        for(ItemSaida item: loteSaida.getItens()){
+            responseJSON += "{\"codigo\":"+item.getCodigo()+",\"nomeProduto\":\""+item.getProduto().getNome()+"\""
+                    + ",\"quantidade\":"+item.getQuantidade()+"}";
+            if(loteSaida.getItens().indexOf(item)!=loteSaida.getItens().size()-1){
+                responseJSON += ",";
+            }
+        }
+        responseJSON += "]}";
+        
+        response.setContentType("text/plain");
+        
+        try(PrintWriter out = response.getWriter()){
+            out.println(responseJSON);
+        }
     }
 
     /**
@@ -64,12 +83,11 @@ public class LoteSaidaServlet extends HttpServlet {
             
             if(i.getQuantidade()>10){
                 session.setAttribute("msglotesaida", "Quantidade do produto "+i.getProduto().getNome()+" insuficiente no estoque!");
+                
                 response.sendError(500);
+                
                 return;
-            
             }
-        
-        
         }
         
         
@@ -82,13 +100,14 @@ public class LoteSaidaServlet extends HttpServlet {
             for (ItemEstoque ie : estoque.getItens()) {
                 if (i.getProduto().getCodigo() == ie.getProduto().getCodigo()) {
                     ie.adiciona(i.getQuantidade());
+                    break;
                 }
             }
         }
         
         RepositorioLoteSaida.getCurrentInstance().create(lS);
         
-        session.removeAttribute("loteEntrada");
+        session.removeAttribute("loteSaida");
         
         session.setAttribute("msglotesaida", "O lote de saída foi inserido com sucesso!");
         
@@ -113,7 +132,7 @@ public class LoteSaidaServlet extends HttpServlet {
             lS = new LoteSaida();
         
             session.setAttribute("loteSaida", lS);
-    }
+        }
         
         if (operacao.equals("mais")) {
 
@@ -146,7 +165,7 @@ public class LoteSaidaServlet extends HttpServlet {
             for (ItemSaida i : lS.getItens()) {
                 if (i.getProduto().getCodigo() == codigo) {
 
-                    if (i.getQuantidade() == 1) {
+                    if (i.getQuantidade() == 1){
                         lS.getItens().remove(i);
                         if(lS.getItens().size() == 0){
                             session.removeAttribute("loteSaida");

@@ -17,27 +17,23 @@
                 font-size:15pt;
                 text-decoration:none;
                 color:blue;
-                font-weight: bold;
-                
-            }
-        </style>
-        
+                font-weight: bold;                
+            }            
+        </style>        
     </head>
     <body>
         <a href="index.html" id="link"> Página Inicial </a> <br/><br/>
         
         <h4>Cadastro de Lote de Saída</h4>
-       
-        <ifpe:carregaprodutos/>
         
         <h4><c:out value="${msglotesaida}" /></h4>
-        <c:remove var="msglotesaida" scope="session" />
+        <c:remove var="msglotesaida" scope="session"/>
                 
-               
+        <ifpe:carregaprodutos/>       
         
         <h4>Produtos Cadastrados</h4>
         <table border="2">
-            <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Quantidade em estoque</th><th>Inserir</th></tr>
+            <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Inserir</th></tr>
                
             <c:forEach var="pAux" items="${produtos}">
                     <tr>
@@ -45,15 +41,14 @@
                         <td>${pAux.nome}</td>
                         <td>${pAux.marca}</td>
                         <td>${pAux.categoria}</td>
-                        <td>""</td>
+                       
                         <td><a href="#" class="plus" onclick="adiciona(${pAux.codigo})">+</a></td>
                     </tr>
                 </c:forEach>
         </table>
         
         
-        <c:if test="${loteSaida !=null}">
-
+        <c:if test="${loteSaida != null}">
 
             <h2>Produtos inseridos no lote de saída</h2>
             <table border="2">
@@ -73,17 +68,17 @@
             </table>
             <button onclick="cadastrar()">Cadastrar lote de saída</button>
             
-        </c:if>
+       </c:if>
         
         <script>
             function adiciona(codigo) {
-                fetch("LoteSaidaServlet?operacao=mais&codigo="+codigo,{method: "put"})
+                fetch("LoteSaidaServlet?operacao=mais&codigo=" + codigo,{method: "put"})
                         .then(function () {
                             location.reload();
                         });
             }
             function diminui(codigo) {
-                fetch("LoteSaidaServlet?operacao=menos&codigo="+codigo,{method: "put"})
+                fetch("LoteSaidaServlet?operacao=menos&codigo=" + codigo,{method: "put"})
                         .then(function () {
                             location.reload();
                         });
@@ -94,7 +89,7 @@
                             if(response.status === 500)
                                 location.reload();
                             else
-                                location.href ="index.html";
+                                location.href ="lotesaidaapresentacao.jsp";
                         }).catch(function(erro){
                             location.reload();
                         });

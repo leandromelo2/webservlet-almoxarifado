@@ -82,15 +82,16 @@ public class LoteEntradaServlet extends HttpServlet {
         
         //for para verificar itens no estoque. usar na saída.
           for(ItemEntrada i: lE.getItens()){
-            if(i.getQuantidade()>30){
-                session.setAttribute("msglote", "Você esta tentando inserir mais de 10 itens do produto "+i.getProduto().getNome()+" no seu lote,"
+              
+                if(i.getQuantidade()>30){
+                    session.setAttribute("msglote", "Você esta tentando inserir mais de 10 itens do produto "+i.getProduto().getNome()+" no seu lote,"
                         + "Tente novamente uma menor quantidade");
                 
-                response.sendError(500);
+                    response.sendError(500);
                 
-                return;
-            }
-        }
+                    return;
+                }
+           }
         
         
         
