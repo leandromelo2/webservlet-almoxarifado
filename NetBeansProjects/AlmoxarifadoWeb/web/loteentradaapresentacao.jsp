@@ -24,8 +24,9 @@
     </head>
     <body>
         <a href="index.html" id="link"> Página Inicial </a> <br/><br/>
+        <a href="loteentrada.jsp" id="link"> Cadastro de lote de entrada</a> <br/>
         
-        <h4>Lotes Inseridos </h4>
+        <h4>Lotes de Entrada Cadastrados </h4>
         
         <h3><c:out value="${msglote}"/></h3>
         <c:remove var="msglote" scope="session"/>

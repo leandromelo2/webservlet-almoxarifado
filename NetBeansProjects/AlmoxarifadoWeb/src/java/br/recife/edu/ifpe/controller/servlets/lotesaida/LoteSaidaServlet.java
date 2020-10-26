@@ -90,8 +90,7 @@ public class LoteSaidaServlet extends HttpServlet {
             }
         }
         
-        
-        
+                
         Estoque estoque = RepositorioEstoque.getCurrentInstance().read();
         
         //fazer adição no lote do estoque
@@ -99,7 +98,7 @@ public class LoteSaidaServlet extends HttpServlet {
 
             for (ItemEstoque ie : estoque.getItens()) {
                 if (i.getProduto().getCodigo() == ie.getProduto().getCodigo()) {
-                    ie.adiciona(i.getQuantidade());
+                    ie.subtrai(i.getQuantidade());
                     break;
                 }
             }

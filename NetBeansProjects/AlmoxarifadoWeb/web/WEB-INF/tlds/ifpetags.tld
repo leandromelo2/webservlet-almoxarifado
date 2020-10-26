@@ -46,6 +46,10 @@
       <body-content>scriptless</body-content>
       <tag-class>br.recife.edu.ifpe.controller.tags.CarregaEstoqueTag</tag-class>
   </tag>
-  
+  <tag>
+      <name>carregaloteentradasaida</name>
+      <body-content>scriptless</body-content>
+      <tag-class>br.recife.edu.ifpe.controller.tags.CarregaLoteEntradaSaida</tag-class>
+  </tag>
     
 </taglib>

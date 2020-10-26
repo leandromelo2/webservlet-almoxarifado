@@ -14,15 +14,17 @@
         <title>JSP Page</title>
         <style>
             .modal{
-                position: absolute;
-                background: white;
-                top: 100px;
-                left: 100px;
+                position:absolute;
+                background:window;
+                top:100px;
+                left:100px; 
+                width: 50%;
             }
         </style>
     </head>
     <body>
         <a href="index.html" id="link"> Página Inicial </a> <br/><br/>
+        <a href="lotesaida.jsp" id="link"> Cadastro de lote de saída</a> <br/>
         
         <h4>Apresentação de lotes de saídas</h4>
         

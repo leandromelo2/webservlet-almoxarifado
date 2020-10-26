@@ -28,7 +28,9 @@
         
         <h4><c:out value="${msglotesaida}" /></h4>
         <c:remove var="msglotesaida" scope="session"/>
-                
+         
+       
+<!-- <%--     
         <ifpe:carregaprodutos/>       
         
         <h4>Produtos Cadastrados</h4>
@@ -46,8 +48,29 @@
                     </tr>
                 </c:forEach>
         </table>
-        
-        
+--%> -->
+
+                    <ifpe:carregaestoque/>       
+
+                 <h4>Produtos em estoque</h4>
+                      <table border="2">
+                           <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Quantidade</th><th>Inserir</th></tr>
+
+                            <c:forEach var="item" items="${estoque.itens}">
+                                      <tr>
+                                         <td>${item.codigo}</td>
+                                         <td>${item.produto.nome}</td>
+                                          <td>${item.produto.marca}</td>
+                                          <td>${item.produto.categoria}</td>
+                                         <td>${item.quantidade}</td>
+                                       
+
+                                         <td><a href="#" class="plus" onclick="adiciona(${item.codigo})">+</a></td>
+                                      </tr>
+                            </c:forEach>
+                     </table>
+
+      
         <c:if test="${loteSaida != null}">
 
             <h2>Produtos inseridos no lote de saída</h2>
@@ -61,6 +84,7 @@
                         <td>${i.produto.marca}</td>
                         <td>${i.produto.categoria}</td>
                         <td>${i.quantidade}</td>
+                      
                         <td><a href="#" class="plus" onclick="diminui(${i.produto.codigo})">-</a>
                             | <a href="#" class="plus" onclick="adiciona(${i.produto.codigo})">+</a></td>
                     </tr>
