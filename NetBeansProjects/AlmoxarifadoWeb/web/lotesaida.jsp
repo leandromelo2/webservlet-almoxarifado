@@ -71,6 +71,7 @@
                     </tr>
                 </c:forEach>
             </table>
+            <button onclick="cadastrar()">Cadastrar lote de saída</button>
             
         </c:if>
         
@@ -84,6 +85,17 @@
             function diminui(codigo) {
                 fetch("LoteSaidaServlet?operacao=menos&codigo="+codigo,{method: "put"})
                         .then(function () {
+                            location.reload();
+                        });
+            }
+            function cadastrar() {
+                fetch("LoteSaidaServlet",{method: "post"})
+                        .then(function (response) {
+                            if(response.status === 500)
+                                location.reload();
+                            else
+                                location.href ="index.html";
+                        }).catch(function(erro){
                             location.reload();
                         });
             }

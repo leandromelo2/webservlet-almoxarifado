@@ -5,9 +5,13 @@
  */
 package br.recife.edu.ifpe.controller.servlets.lotesaida;
 
+import br.recife.edu.ifpe.model.classes.Estoque;
+import br.recife.edu.ifpe.model.classes.ItemEstoque;
 import br.recife.edu.ifpe.model.classes.ItemSaida;
 import br.recife.edu.ifpe.model.classes.LoteSaida;
 import br.recife.edu.ifpe.model.classes.Produto;
+import br.recife.edu.ifpe.model.repositorios.RepositorioEstoque;
+import br.recife.edu.ifpe.model.repositorios.RepositorioLoteSaida;
 import br.recife.edu.ifpe.model.repositorios.RepositorioProdutos;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +54,44 @@ public class LoteSaidaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        
+        HttpSession session = request.getSession();
+        
+        LoteSaida lS = (LoteSaida)session.getAttribute("loteSaida");
+        
+        //verificação de estoque
+        for(ItemSaida i: lS.getItens()){
+            
+            if(i.getQuantidade()>10){
+                session.setAttribute("msglotesaida", "Quantidade do produto "+i.getProduto().getNome()+" insuficiente no estoque!");
+                response.sendError(500);
+                return;
+            
+            }
+        
+        
+        }
+        
+        
+        
+        Estoque estoque = RepositorioEstoque.getCurrentInstance().read();
+        
+        //fazer adição no lote do estoque
+        for (ItemSaida i: lS.getItens()) {
+
+            for (ItemEstoque ie : estoque.getItens()) {
+                if (i.getProduto().getCodigo() == ie.getProduto().getCodigo()) {
+                    ie.adiciona(i.getQuantidade());
+                }
+            }
+        }
+        
+        RepositorioLoteSaida.getCurrentInstance().create(lS);
+        
+        session.removeAttribute("loteEntrada");
+        
+        session.setAttribute("msglotesaida", "O lote de saída foi inserido com sucesso!");
+        
     }
 
     @Override

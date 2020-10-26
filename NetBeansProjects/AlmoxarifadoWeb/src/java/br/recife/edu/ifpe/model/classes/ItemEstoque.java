@@ -41,7 +41,7 @@ public class ItemEstoque {
     }
     
     public void subtrai(int quantidade){
-        this.quantidade -= quantidade;
+        this.quantidade -= quantidade;//23 7:30 Falta implementar verificação se a quantidade for negativa resoma e laça na sessão
     }
     
     
